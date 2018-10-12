@@ -45,8 +45,9 @@
                 //         this.$message.error(err); //登录失败提示错误
                 //     });
                 
-                //属性 ruleForm
+                //1、el-form rules，model属性绑定，ref标识  2、el-form-item prop属性绑定
                 this.$refs[formName].validate((valid) => {
+                    //console.log(valid)  返回 true
                     if (valid) {
                         localStorage.setItem('ms_username',this.ruleForm.username);
                         this.$router.push('/');
