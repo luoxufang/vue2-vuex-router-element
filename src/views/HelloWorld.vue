@@ -25,7 +25,6 @@
 			</el-col>
 		</el-col>
 
-
     <el-menu default-active="1-4-1" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose" :collapse="isCollapse">
       <el-submenu index="1">
         <template slot="title">
@@ -42,13 +41,6 @@
           <el-menu-item index="1-6">已关闭团长</el-menu-item>
           <el-menu-item index="1-7">打烊团长</el-menu-item>
         </el-menu-item-group>
-        <!-- <el-menu-item-group title="分组2">
-          <el-menu-item index="1-3">选项3</el-menu-item>
-        </el-menu-item-group> -->
-        <!-- <el-submenu index="1-4">
-          <span slot="title">选项4</span>
-          <el-menu-item index="1-4-1">选项1</el-menu-item>
-        </el-submenu> -->
       </el-submenu>
       <el-menu-item index="2">
         <i class="el-icon-menu"></i>
@@ -58,34 +50,6 @@
       <el-menu-item index="3">
         <i class="el-icon-document"></i>
         <span slot="title">订单管理</span>
-      </el-menu-item>
-      <el-menu-item index="4">
-        <i class="el-icon-setting"></i>
-        <span slot="title">营销功能</span>
-      </el-menu-item>
-      <el-menu-item index="5">
-        <i class="el-icon-setting"></i>
-        <span slot="title">财务管理</span>
-      </el-menu-item>
-      <el-menu-item index="6">
-        <i class="el-icon-setting"></i>
-        <span slot="title">数据统计</span>
-      </el-menu-item>
-      <el-menu-item index="7">
-        <i class="el-icon-setting"></i>
-        <span slot="title">物流管理</span>
-      </el-menu-item>
-      <el-menu-item index="8">
-        <i class="el-icon-setting"></i>
-        <span slot="title">流水记录</span>
-      </el-menu-item>
-      <el-menu-item index="9">
-        <i class="el-icon-setting"></i>
-        <span slot="title">售后工单</span>
-      </el-menu-item>
-      <el-menu-item index="10">
-        <i class="el-icon-setting"></i>
-        <span slot="title">系统设置</span>
       </el-menu-item>
     </el-menu>
     <div id="model" v-if="show"></div>
@@ -146,7 +110,8 @@
 <style scoped lang="scss">
 .el-menu-vertical-demo:not(.el-menu--collapse) {
   width: 200px;
-  min-height: 400px;
+  min-height: 600px;
+  margin-top: 60px;
 }
 .container {
 	position: absolute;
