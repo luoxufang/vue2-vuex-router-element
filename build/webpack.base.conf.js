@@ -28,6 +28,7 @@ module.exports = {
       'vue$': 'vue/dist/vue.esm.js',
       '@': resolve('src'),
       'static': path.resolve(__dirname, '../static'),
+      'scss_vars': '@/styles/vars.scss'
     }
   },
   module: {

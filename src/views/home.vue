@@ -25,33 +25,45 @@
 			</el-col>
 		</el-col>
 
-    <el-menu default-active="1-4-1" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose" :collapse="isCollapse">
-      <el-submenu index="1">
-        <template slot="title">
-          <i class="el-icon-location"></i>
-          <span slot="title">用户管理</span>
-        </template>
-        <el-menu-item-group>
-          <!-- <span slot="title">分组一</span> -->
-          <el-menu-item index="1-1">会员管理</el-menu-item>
-          <el-menu-item index="1-2">团长列表</el-menu-item>
-          <el-menu-item index="1-3">未审核</el-menu-item>
-          <el-menu-item index="1-4">黑名单列表</el-menu-item>
-          <el-menu-item index="1-5">已拒绝团长</el-menu-item>
-          <el-menu-item index="1-6">已关闭团长</el-menu-item>
-          <el-menu-item index="1-7">打烊团长</el-menu-item>
-        </el-menu-item-group>
-      </el-submenu>
-      <el-menu-item index="2">
-        <i class="el-icon-menu"></i>
-        <span slot="title">商城管理</span>
-      </el-menu-item>
-      <!-- <el-menu-item index="3" disabled> -->
-      <el-menu-item index="3">
-        <i class="el-icon-document"></i>
-        <span slot="title">订单管理</span>
-      </el-menu-item>
-    </el-menu>
+    <el-col :span="24" class="main">
+			<aside :class="collapsed?'menu-collapsed':'menu-expanded'">
+				<!--导航菜单-->
+				<el-menu :default-active="$route.path" class="el-menu-vertical-demo" @open="handleopen" @close="handleclose" @select="handleselect" unique-opened router v-show="!collapsed">
+					<template v-for="(item,index) in $router.options.routes" v-if="!item.hidden">
+
+						<el-submenu :index="index+''" v-if="!item.leaf">
+							<template slot="title">
+								<i :class="item.iconCls"></i>{{item.name}}</template>
+
+							<el-menu-item v-for="child in item.children" :index="child.path" :key="child.path" v-if="!child.hidden">{{child.name}}</el-menu-item>
+
+						</el-submenu>
+
+						<el-menu-item v-if="item.leaf&&item.children.length>0" :index="item.children[0].path">
+							<i :class="item.iconCls"></i>{{item.children[0].name}}</el-menu-item>
+
+					</template>
+				</el-menu>
+      </aside>
+      <section class="content-container">
+				<div class="grid-content bg-purple-light">
+					<el-col :span="24" class="breadcrumb-container">
+						<strong class="title">{{$route.name}}</strong>
+						<el-breadcrumb separator="/" class="breadcrumb-inner">
+							<el-breadcrumb-item v-for="item in $route.matched" :key="item.path">
+								{{ item.name }}
+							</el-breadcrumb-item>
+						</el-breadcrumb>
+					</el-col>
+					<el-col :span="24" class="content-wrapper">
+						<transition name="fade" mode="out-in">
+							<router-view></router-view>
+						</transition>
+					</el-col>
+				</div>
+			</section>
+    </el-col>
+    
     <div id="model" v-if="show"></div>
   </el-row>
 </template>
@@ -60,7 +72,7 @@
   export default {
     data() {
       return {
-        sysName: '商家管理后台',
+        sysName: '团长后台管理',
         collapsed: false,
         sysUserName: '张三',
         sysUserAvatar: '../../assets/user.png',
@@ -83,11 +95,16 @@
       };
     },
     methods: {
-      handleOpen(key, keyPath) {
-        console.log(key, keyPath);
+      onSubmit() {
+        console.log('submit!');
       },
-      handleClose(key, keyPath) {
-        console.log(key, keyPath);
+      handleopen() {
+        //console.log('handleopen');
+      },
+      handleclose() {
+        //console.log('handleclose');
+      },
+      handleselect: function (a, b) {
       },
       //折叠导航栏
       collapse: function () {
@@ -97,7 +114,6 @@
     mounted() {
       this.sysUserName = localStorage.getItem('ms_username') || '';
       this.sysUserAvatar = '../../static/user.png' || '';
-
       // if (user) {
       //   user = JSON.parse(ms_username);
       //   this.sysUserName = user.name || '';
@@ -108,10 +124,10 @@
 </script>
 
 <style scoped lang="scss">
+@import '~scss_vars';
 .el-menu-vertical-demo:not(.el-menu--collapse) {
   width: 200px;
   min-height: 600px;
-  margin-top: 60px;
 }
 .container {
 	position: absolute;
@@ -170,6 +186,71 @@
 			height: 60px;
 			line-height: 60px;
 			cursor: pointer;
+		}
+	}
+  .main {
+		display: flex; // background: #324057;
+		position: absolute;
+		top: 60px;
+		bottom: 0px;
+		overflow: hidden;
+		aside {
+			flex: 0 0 230px;
+			width: 230px; // position: absolute;
+			// top: 0px;
+			// bottom: 0px;
+			.el-menu {
+				height: 100%;
+				overflow: auto;
+
+			}
+			.collapsed {
+				width: 60px;
+				.item {
+					position: relative;
+				}
+				.submenu {
+					position: absolute;
+					top: 0px;
+					left: 60px;
+					z-index: 99999;
+					height: auto;
+					display: none;
+				}
+			}
+		}
+		.menu-collapsed {
+			flex: 0 0 60px;
+			width: 60px;
+		}
+		.menu-expanded {
+			flex: 0 0 230px;
+			width: 230px;
+		}
+		.content-container {
+			// background: #f1f2f7;
+			flex: 1; // position: absolute;
+			// right: 0px;
+			// top: 0px;
+			// bottom: 0px;
+			// left: 230px;
+			overflow-y: scroll;
+			padding: 20px;
+			.breadcrumb-container {
+				//margin-bottom: 15px;
+				.title {
+					width: 200px;
+					float: left;
+					color: #475669;
+				}
+				.breadcrumb-inner {
+					float: right;
+				}
+			}
+			.content-wrapper {
+				background-color: #fff;
+				box-sizing: border-box;
+			}
 		}
 	}
 }

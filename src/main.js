@@ -19,7 +19,6 @@ const router = new VueRouter({
 })
 
 /* eslint-disable no-new */
-
 // this.$store.dispatch('LoginByUsername', this.loginForm).then(() => {
 //   this.$router.push({ path: '/' }); //登录成功之后重定向到首页
 // }).catch(err => {
