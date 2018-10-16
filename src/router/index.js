@@ -62,16 +62,6 @@ let routes = [
     children: [
       { path: '/manage', component: () => import('@/views/manage/manage'), name: '团长管理' }
     ]
-  },
-  {
-    path: '/myAccount',
-    component: () => import('@/views/home'),
-    name: '',
-    iconCls: 'fa fa-address-book',
-    leaf: true,//只有一个节点
-    children: [
-      { path: '/myAccount', component: () => import('@/views/myAccount/myAccount'), name: '账户管理' }
-    ]
   }
 ]
 
