@@ -9,6 +9,7 @@ import 'element-ui/lib/theme-chalk/index.css'
 import VueRouter from 'vue-router'
 import routes from './router/index'
 import store from './store'
+import "babel-polyfill";
 
 Vue.use(VueRouter)
 Vue.use(ElementUI);

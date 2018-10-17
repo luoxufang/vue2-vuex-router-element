@@ -14,7 +14,7 @@
 			<div style="text-align:left;margin-bottom:14px">
 				<span style="margin:0px 16px 0 8px;;">全选</span>
 				<el-button type="danger" size="mini" plain>删除</el-button>
-                <el-button type="danger" size="mini" plain>上架</el-button>
+        <el-button type="danger" size="mini" plain>上架</el-button>
 			</div>
 			<el-table :data="tableData" border style="width: 100%" ref="multipleTable" @selection-change="handleSelectionChange">
           <el-table-column type="selection" width="55"></el-table-column>
