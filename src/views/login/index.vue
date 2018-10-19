@@ -38,13 +38,6 @@
         },
         methods: {
             submitForm(formName) {
-                // this.$store.dispatch('LoginByUsername', this.loginForm).then(() => {
-                //         localStorage.setItem('ms_username',this.ruleForm.username);
-                //         this.$router.push({ path: '/' }); //登录成功之后重定向到首页
-                //     }).catch(err => {
-                //         this.$message.error(err); //登录失败提示错误
-                //     });
-                
                 //1、el-form rules，model属性绑定，ref标识  2、el-form-item prop属性绑定
                 this.$refs[formName].validate((valid) => {
                     //console.log(valid)  返回 true

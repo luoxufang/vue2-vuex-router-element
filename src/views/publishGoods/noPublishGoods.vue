@@ -108,6 +108,7 @@
 	</div>
 </template>
 <script>
+import { baseURL, modifyUser} from '../../api/api';
 export default {
   data() {
     const item = {
